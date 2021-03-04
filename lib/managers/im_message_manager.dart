@@ -60,12 +60,27 @@ class ImMessageManager {
     int count = 20,
     String lastMsgID,
   }) {
-    return TencentImPlugin.getHistoryMessageList(
-      userID: userID,
-      groupID: groupID,
-      count: count,
-      lastMsg: lastMsgID == null ? null : FindMessageEntity(msgId: lastMsgID),
-    );
+    if (userID != null) {
+      return TencentImPlugin.getC2CHistoryMessageList(
+        userID: userID,
+        count: count,
+        lastMsg: lastMsgID == null ? null : FindMessageEntity(msgId: lastMsgID),
+      );
+    } else if (groupID != null) {
+      return TencentImPlugin.getGroupHistoryMessageList(
+        groupID: groupID,
+        count: count,
+        lastMsg: lastMsgID == null ? null : FindMessageEntity(msgId: lastMsgID),
+      );
+    } else {
+      return Future.value([]);
+    }
+    // return TencentImPlugin.getHistoryMessageList(
+    //   userID: userID,
+    //   groupID: groupID,
+    //   count: count,
+    //   lastMsg: lastMsgID == null ? null : FindMessageEntity(msgId: lastMsgID),
+    // );
   }
 
   /// 设置聊天记录为已读，此为 markC2CMessageAsRead 和 markGroupMessageAsRead 的封装
