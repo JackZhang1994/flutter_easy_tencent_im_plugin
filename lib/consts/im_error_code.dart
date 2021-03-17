@@ -262,4 +262,7 @@ class IMErrorCode {
 
   /// 群组 ID 非法，请检查群组 ID 是否填写正确。
   static const String error_code_10015 = '10015';
+
+  /// 群不存在
+  static const String error_code_10010 = '10010';
 }
